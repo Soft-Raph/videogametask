@@ -13,17 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    return view('index');
+Route::group(['prefix'=>'app'], function(){
+    Route::get('/', function () {
+        return view('index');
+    });
+    
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth'])->name('dashboard');
+    
+    Route::get('/home', function(){
+        return phpinfo();
+    });
+    
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
-Route::get('/home', function(){
-    return phpinfo();
-});
+
 
 
